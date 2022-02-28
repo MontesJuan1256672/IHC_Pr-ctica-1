@@ -5,19 +5,26 @@ using UnityEngine;
 public class Problema : MonoBehaviour
 {
     // Start is called before the first frame update
-    public int[] input;
+    public List <int[]> testCases = new List <int[]>();
+    public List <int[]> testExpectedResults = new List <int[]>();
+    public List <int[]> prueba;
 
+    void Start()
+    {
+        testCases.Add(new int[]{8,1,2,2,3});
+        testExpectedResults.Add(new int[]{4,0,1,1,3});
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            int[] test1 = NumbersLessThan(input);
-            foreach (int n in test1)
+            for (int i = 0; i < testCases.Count; i++)
             {
-                Debug.Log(n);    
-            }
+                int[] result = NumbersLessThan(testCases[i]);
+                bool passedTest = CompareTestResult(result,testExpectedResults[i]);
+                Debug.Log($"Test {i}  :  {passedTest}");   
+            }            
         }
-        
     }
 
     private int[] NumbersLessThan(int[] numbers)
@@ -40,5 +47,15 @@ public class Problema : MonoBehaviour
 
 
         return result;
+    }
+
+    private bool CompareTestResult(int[] result, int[] expectedResult)
+    {
+        if(expectedResult.Length != result.Length) return false;
+        for (int i = 0; i < result.Length; i++)
+        {
+            if(result[i] != expectedResult[i]) return false;
+        }
+        return true;
     }
 }
