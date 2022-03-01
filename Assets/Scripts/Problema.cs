@@ -7,7 +7,6 @@ public class Problema : MonoBehaviour
     // Start is called before the first frame update
     public List <int[]> testCases = new List <int[]>();
     public List <int[]> testExpectedResults = new List <int[]>();
-    public List <int[]> prueba;
 
     void Start()
     {
